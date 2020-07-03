@@ -1,0 +1,29 @@
+{
+  "name": "yourslides",
+  "version": "1.0.0",
+  "description": "Aplicación YourSlides",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamuelNavD/yourslides.git"
+  },
+  "keywords": [
+    "YourSlides",
+    "Presentaciones",
+    "Presentations"
+  ],
+  "author": "Samuel Navarro Diez",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/SamuelNavD/yourslides/issues"
+  },
+  "homepage": "https://github.com/SamuelNavD/yourslides#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}
