@@ -18,11 +18,16 @@ const UserSchema = Schema({
 UserSchema.pre('save', (err) => {
   let user = this;
 
-  bcrypt.hash(user.password, 10, (err, hash) => {
+  bcrypt.genSalt(10, (err, salt) => {
     if (err) return console.log(err);
-
-    user.password = hash;
+    console.log('Usuario pass:' + user.password);
+    bcrypt.hash(user.password, salt, (err, hash) => {
+      if (err) return console.log(err);
+      user.password = hash;
+    });
   });
+
+  
 });
 
 module.exports = mongoose.model('User', UserSchema);

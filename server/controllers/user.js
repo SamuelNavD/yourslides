@@ -2,6 +2,7 @@
 
 const User = require('../models/user');
 const service = require('../services/tokens');
+const fs = require('fs');
 
 function signUp (req, res) {
   const user = new User({
@@ -9,8 +10,16 @@ function signUp (req, res) {
     displayName: req.body.displayName,
     name: req.body.name,
     surname: req.body.surname,
-    password: req.body.password
+    password: req.body.password,
+    avatar: "Sin imagen"
   });
+
+  if (req.files) {
+    console.log(req.files.avatar.path);
+    const filePath = req.files.avatar.path;
+    const fileName = filePath.split('/')[1];
+    user.avatar = fileName;
+  }
 
   user.save((err) => {
     if (err) return res.status(500).send({ message: `Error al crear el usaurio: ${err}` });
