@@ -15,19 +15,28 @@ const UserSchema = Schema({
   lastLogin: Date
 });
 
-UserSchema.pre('save', (err) => {
-  let user = this;
+UserSchema.pre('save', function(next) {
+  var user = this;
+  if (!user.isModified('password')) return next();
 
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) return console.log(err);
-    console.log('Usuario pass:' + user.password);
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) return console.log(err);
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) return next(err);
+
+    bcrypt.hash(user.password, salt, function(err, hash) {
+      if (err) return next(err);
+
       user.password = hash;
+      next();
     });
   });
+});
 
-  
+UserSchema.method('comparePassword', function(plainPassword, next) {
+  bcrypt.compare(plainPassword, this.password, function(err, result) {
+      if (err) return next(err);
+
+      next(null, result);
+  });
 });
 
 module.exports = mongoose.model('User', UserSchema);
