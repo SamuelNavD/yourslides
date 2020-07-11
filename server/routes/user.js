@@ -11,6 +11,6 @@ var multipartMiddleware = multipart({ uploadDir: __dirname + '/../uploads'});
 
 router.post('/signup', multipartMiddleware, userCtrl.signUp);
 router.post('/signin', multipartMiddleware, userCtrl.signIn);
-router.put('/update', multipartMiddleware, userCtrl.updateUser);
+router.put('/update', auth, multipartMiddleware, userCtrl.updateUser);
 
 module.exports = router;
