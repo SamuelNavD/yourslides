@@ -107,6 +107,7 @@ dist
 config.js
 server/uploads
 
+<<<<<<< HEAD
 ##########################################
 ##               ANGULAR               ##
 ##################################¢#######
@@ -157,3 +158,36 @@ frontend/testem.log
 # System Files
 frontend/.DS_Store
 frontend/Thumbs.db
+=======
+# ANGULAR
+################################################################################################
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+frontend/dist
+frontend/tmp
+frontend/out-tsc
+# Only exists if Bazel was run
+frontend/bazel-out
+
+# dependencies
+frontend/node_modules
+
+# profiling files
+frontend/chrome-profiler-events*.json
+frontend/speed-measure-plugin*.json
+
+# misc
+frontend/.sass-cache
+frontend/connect.lock
+frontend/coverage
+frontend/libpeerconnection.log
+frontend/npm-debug.log
+frontend/yarn-error.log
+frontend/testem.log
+frontend/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+>>>>>>> 876bcf2f42dc6862130623f181b1db5778420aae
