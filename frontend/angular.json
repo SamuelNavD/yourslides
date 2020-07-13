@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@drewbot/sass-flexbox-grid/public/sass-flexbox/main.min.css"
             ],
             "scripts": []
           },

@@ -1,0 +1,29 @@
+@import "../assets/variables.scss";
+
+/* Header */
+header {
+  .title {
+    font-family: 'Px Grotesk';
+    font-size: 2em;
+    padding: 20px 30px;
+  }
+
+  ul {
+    li {
+      padding: 20px 10px;
+
+      a {
+        font-family: 'Px Grotesk';
+        text-decoration: none;
+        transition: all ease 0.45s;
+      }
+      a:hover {
+        color: $primary-color;
+      }
+      .btn {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
