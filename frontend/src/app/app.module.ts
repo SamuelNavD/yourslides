@@ -7,6 +7,9 @@ import { UsersComponent } from './components/users/users.component';
 import { SiteLayoutComponent } from './components/_layouts/site-layout/site-layout.component';
 import { PanelLayoutComponent } from './components/_layouts/panel-layout/panel-layout.component';
 import { HomePanelComponent } from './components/panel/home-panel/home-panel.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistroComponent } from './components/registro/registro.component';
+import { Page404Component } from './components/page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { HomePanelComponent } from './components/panel/home-panel/home-panel.com
     UsersComponent,
     SiteLayoutComponent,
     PanelLayoutComponent,
-    HomePanelComponent
+    HomePanelComponent,
+    LoginComponent,
+    RegistroComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

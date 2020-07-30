@@ -35,7 +35,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
 ol, ul {
 	list-style: none;
@@ -55,62 +55,58 @@ table {
 
 /* Fonts */
 @font-face {
-  font-family: 'Px Grotesk';
-  src: url('assets/fonts/PxGrotesk-BoldItalic.woff2') format('woff2'),
-      url('assets/fonts/PxGrotesk-BoldItalic.woff') format('woff');
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
+    font-family: 'Stolzl';
+    src: url('assets/fonts/Stolzl-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Px Grotesk';
-  src: url('assets/fonts/PxGrotesk-Bold.woff2') format('woff2'),
-      url('assets/fonts/PxGrotesk-Bold.woff') format('woff');
-  font-weight: bold;
+  font-family: 'Stolzl';
+  src: url('assets/fonts/Stolzl-Light.woff2') format('woff2');
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Mont';
-  src: url('assets/fonts/Mont-BookItalic.woff2') format('woff2'),
-      url('assets/fonts/Mont-BookItalic.woff') format('woff');
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
+    font-family: 'Stolzl Book';
+    src: url('assets/fonts/Stolzl-Book.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Mont';
-  src: url('assets/fonts/Mont-HeavyItalic.woff2') format('woff2'),
-      url('assets/fonts/Mont-HeavyItalic.woff') format('woff');
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
+    font-family: 'Stolzl';
+    src: url('assets/fonts/Stolzl-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Mont';
-  src: url('assets/fonts/Mont-Heavy.woff2') format('woff2'),
-      url('assets/fonts/Mont-Heavy.woff') format('woff');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Stolzl';
+    src: url('assets/fonts/Stolzl-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Mont';
-  src: url('assets/fonts/Mont-Book.woff2') format('woff2'),
-      url('assets/fonts/Mont-Book.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Stolzl';
+    src: url('assets/fonts/Stolzl-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
 }
+
+
 
 /* Headers */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Px Grotesk";
+  font-family: $logo-font;
   font-weight: bold;
 }
 
@@ -123,11 +119,68 @@ h6 { font-size: 1em; }
 
 /* Texts */
 p, a {
-  font-family: "Mont";
+  font-family: $stolzl;
   color: black;
 }
 
 .text-primary { color: $primary-color; }
+
+/* Background Colors */
+.bg-primary {
+  background-color: $primary-color;
+  color: white;
+}
+
+/* Components */
+/* - Icons */
+.fa-group {
+  .fa-primary {
+    fill: $secondary-color-dark;
+  }
+  
+  .fa-secondary {
+    fill: $secondary-color;
+  }
+
+  .fa-accent {
+    fill: $primary-color;
+  }
+}
+
+
+
+/* - Call to action */
+.cta-container {
+  width: calc(100vw - 332px);
+  margin-left: -5.5em;
+  display: flex;
+  padding-top: 3em;
+  padding-bottom: 5em;
+  overflow-x: auto;
+
+  .cta:first-of-type {
+    margin-right: 2em;
+    margin-left:  6em;
+  }
+  
+}
+
+.cta {
+  width: 500px;
+  min-width: 500px;
+  height: 270px;
+  margin-top: 5em;
+  background-color: $primary-color;
+  border-radius: 2.5em;
+
+  &.cta-third {
+    background-color: $third-color;
+  }
+
+  h1 {
+    color: white;
+  }
+}
 
 /* Buttons */
 .btn {
@@ -141,4 +194,3 @@ p, a {
     background-color: $primary-color-dark;
   }
 }
-
