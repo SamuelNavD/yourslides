@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home-panel',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePanelComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(
+    public _userService: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.user = this._userService.decryptLocalUserInfo();
   }
 
 }

@@ -20,7 +20,7 @@ function signUp (req, res) {
 }
 
 function signIn (req, res) {
-  User.findOne({ email: req.body.email }).select('password').exec((err, user) => {
+  User.findOne({ email: req.body.email }, 'name surname email avatar password').exec((err, user) => {
     if (err) return res.status(500).send({ message: err });
     if (!user) return res.status(404).send({ message: "No existe el usuario" });
 
@@ -32,6 +32,7 @@ function signIn (req, res) {
 
       return res.status(200).send({
         message: "Te has logueado",
+        user: user,
         token: service.createToken(user)
       });
     });
@@ -59,8 +60,24 @@ function updateUser (req, res) {
   });
 }
 
+function getUser ( req, res ) {
+
+  var id = req.params.id;
+
+  User.findById( id, 'name surname email avatar')
+      .exec( (err, user) => {
+        if (err) return res.status(500).send({ message: err });
+        if (!user) return res.status(404).send({ message: "No existe el usuario" });
+
+        res.status(200).json({
+          user: user
+        });
+      });
+}
+
 module.exports = {
   signUp,
   signIn,
-  updateUser
+  updateUser,
+  getUser
 };
