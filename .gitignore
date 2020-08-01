@@ -124,7 +124,7 @@ server/uploads
 /frontend/node_modules
 
 # config files
-/frontend/config/config.ts
+/frontend/src/app/config/config.ts
 
 # profiling files
 chrome-profiler-events*.json
