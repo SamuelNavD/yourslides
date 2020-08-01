@@ -7,7 +7,6 @@ const fs = require('fs');
 function signUp (req, res) {
   var user = new User({
     email: req.body.email,
-    displayName: req.body.displayName,
     name: req.body.name,
     surname: req.body.surname,
     password: req.body.password
@@ -29,7 +28,7 @@ function signIn (req, res) {
 
     user.comparePassword(req.body.password, function(err, result) {
       if (err) return res.status(500).send({ message: `Error en el inicio de sesión: ${err}` });
-      if (!result) return res.status(401).send({ message: 'Contraseña incorrecta' });
+      if (!result) return res.status(401).send({ message: 'Credenciales incorrectas' });
 
       return res.status(200).send({
         message: "Te has logueado",
