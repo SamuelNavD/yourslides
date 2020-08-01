@@ -7,12 +7,17 @@ import { HomePanelComponent } from './components/panel/home-panel/home-panel.com
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { Page404Component } from './components/page404/page404.component';
+import { UserProfileComponent } from './components/panel/user-profile/user-profile.component';
+
+import { LoginGuard } from './services/guards/login.guard';
 
 const routes: Routes = [
   {
     path: 'panel',
     component: PanelLayoutComponent,
+    canActivate: [ LoginGuard ],
     children: [
+      { path: 'perfil', component: UserProfileComponent },
       { path: '', component: HomePanelComponent}
     ]
   },

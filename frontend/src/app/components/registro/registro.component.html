@@ -1,1 +1,10 @@
-<p>registro works!</p>
+<form [formGroup]="formRegistro" action="" id="formRegistro" (ngSubmit)="registroUsuario()" ngNativeValidate>
+  <input formControlName="name" type="text" placeholder="Nombre" required>
+  <input formControlName="surname" type="text" placeholder="Apellidos" required>
+  <input formControlName="email" type="email" placeholder="Correo electrónico" required>
+  <input formControlName="password" type="password" placeholder="Contraseña" required>
+  <input formControlName="password2" type="password" placeholder="Repetición de contraseña" required>
+  <input formControlName="agree" type="checkbox" required> Acepto los términos
+  <input type="submit" value="Registrarme">
+  <p *ngIf="formRegistro.errors?.equals && !formRegistro.pristine">Las contraseñas no coinciden</p>
+</form>

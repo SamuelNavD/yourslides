@@ -1,1 +1,10 @@
-<p>login works!</p>
+<div class="row around-xs middle-xs" style="height: 100vh;">
+  <div class="col" style="max-width: 500px">
+    <form #form="ngForm" (ngSubmit)="loginUsuario(form)" ngNativeValidate>
+      <input [(ngModel)]="email" name="email" type="email" placeholder="Correo electrónico" required>
+      <input ngModel name="password" type="password" placeholder="Contraseña" required>
+      <input [(ngModel)]="rememberme" name="rememberme" type="checkbox"> Recuérdame
+      <input type="submit" value="Iniciar Sesión">
+    </form>
+  </div>
+</div>
