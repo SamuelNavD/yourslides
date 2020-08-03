@@ -1,1 +1,39 @@
-<p>user-profile works!</p>
+<div class="page-title">
+  <h1>Tu perfil</h1>
+</div>
+
+<div class="row">
+  <form ngNativeValidator #f="ngForm" action="" (submit)="updateUser(f)" class="contact-form">
+    <div class="wrap-contact">
+
+      <div class="wrap-input validate-input">
+        <label class="label-input" for="name">Nombre</label>
+        <input id="name" [(ngModel)]="user.name" class="input" type="text" name="name" placeholder="¿Cómo te llamas?" required>
+        <span class="focus-input"></span>
+      </div>
+
+      <div class="wrap-input validate-input">
+        <label class="label-input" for="surname">Apellidos</label>
+        <input id="surname" [(ngModel)]="user.surname" class="input" type="text" name="surname" placeholder="¿Sería mucho pedir que nos dijeses cómo te apellidas?" required>
+        <span class="focus-input"></span>
+      </div>
+
+      <div class="wrap-input validate-input">
+        <label class="label-input" for="email">Correo Electrónico</label>
+        <input id="email" [(ngModel)]="user.email" class="input" type="text" name="email" placeholder="¿Qué correo quires que usemos para mandarte información importante?" required>
+        <span class="focus-input"></span>
+      </div>
+
+      <div class="container-contact-form-btn">
+        <button type="submit" class="btn btn-full btn-primary" [disabled]="!f.form.valid">
+          Guardar
+        </button>
+      </div>
+
+    </div>
+  
+  </form>
+  <input type="file" (change)="uploadImage( $event.target.files[0] )" >
+  <img [src]="imgTemp" alt="">
+  <button (click)="updateUserImage()" [disabled]="!userUpload">Cambiar imagen perfil</button>    
+</div>

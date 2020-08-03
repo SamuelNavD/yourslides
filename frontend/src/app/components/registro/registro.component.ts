@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -14,7 +15,8 @@ export class RegistroComponent implements OnInit {
   formRegistro: FormGroup;
 
   constructor(
-    public _userService: UserService
+    public _userService: UserService,
+    public router: Router
   ) { }
 
   passwordEquals( pass1: string, pass2: string ) {
@@ -62,7 +64,8 @@ export class RegistroComponent implements OnInit {
       );
 
       this._userService.createUser(user).subscribe( res => {
-        console.log(res);
+        this._userService.loginUser(user, false);
+        this.router.navigate(['/panel']);
       });
     } else if ( !this.formRegistro.value.agree ) {
       console.log('No se han aceptado las condiciones');

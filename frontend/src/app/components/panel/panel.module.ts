@@ -4,6 +4,8 @@ import { PanelComponent } from './panel.component';
 import { PanelLayoutComponent } from '../_layouts/panel-layout/panel-layout.component';
 import { HomePanelComponent } from './home-panel/home-panel.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     UserProfileComponent
   ],
   imports: [
-    AppRoutingModule
+    AppRoutingModule,
+    PipesModule,
+    FormsModule
   ]
 })
 export class PanelModule { }

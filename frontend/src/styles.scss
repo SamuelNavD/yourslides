@@ -1,6 +1,5 @@
 /* Imports */
 @import "../node_modules/@drewbot/sass-flexbox-grid/public/sass-flexbox/main.min.css";
-
 @import "assets/variables.scss";
 
 /* Reset */
@@ -184,13 +183,56 @@ p, a {
 
 /* Buttons */
 .btn {
+  border: none;
+  outline: 0px;
   padding: 10px 15px;
-  border-radius: 3px;
+  border-radius: 5px;
+  transition: all ease 0.25s;
+  font-family: $stolzl;
+  :hover {
+    cursor: pointer;
+  }
+  &.btn-full {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 7px;
+  }
+  &.btn-big {
+    font-size: 1.2em;
+  }
 }
 .btn-primary {
   background-color: $primary-color;
   color: white;
   &:hover {
     background-color: $primary-color-dark;
+  }
+}
+
+/* Theme Sweet Alert */
+.swal2-container {
+  font-family: $stolzl;
+
+  .swal2-title {
+    color: black;
+  }
+
+  .swal2-content {
+    font-weight: 400;
+    margin: 1em 0;
+  }
+
+  .swal2-actions {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    button.swal2-styled {
+      width: 47%;
+    }
+  }
+
+  
+
+  small {
+    font-size: 0.8em;
   }
 }

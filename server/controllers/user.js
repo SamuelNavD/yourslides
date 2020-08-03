@@ -3,19 +3,30 @@
 const User = require('../models/user');
 const service = require('../services/tokens');
 const fs = require('fs');
+const request = require('request');
 
 function signUp (req, res) {
+  var download = function(uri, filename, callback){
+    request.head(uri, function(err, res, body){
+      request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+    });
+  };
+
+  download('https://eu.ui-avatars.com/api/?format=svg&background=6752ba&color=fff&name='+req.body.name+'+'+req.body.surname.split(' ')[0], './server/uploads/'+req.body.name+req.body.surname.split(' ')[0]+'_default.svg', function(){});
+
   var user = new User({
     email: req.body.email,
     name: req.body.name,
     surname: req.body.surname,
-    password: req.body.password
+    password: req.body.password,
+    avatar: req.body.name+req.body.surname.split(' ')[0]+'_default.svg'
   });
 
   user.save((err) => {
     if (err) return res.status(500).send({ message: `Error al crear el usaurio: ${err}` });
 
-    return res.status(201).send({ token: service.createToken(user) });
+    user.password = ':)';
+    return res.status(201).send({ user: user, token: service.createToken(user) });
   });
 }
 
@@ -39,24 +50,20 @@ function signIn (req, res) {
   });
 }
 
-function updateUser (req, res) {
-  var avatar = null;
-  if (req.files) {
-    const filePath = req.files.avatar.path.split('/');
-    avatar = filePath[filePath.length - 1];
-  }
-
+async function updateUser (req, res) {
   User.findOneAndUpdate({ _id: req.body._id }, {
     email: req.body.email,
-    displayName: req.body.displayName,
     name: req.body.name,
     surname: req.body.surname,
-    avatar: avatar
-  }, (err, user) => {
+    avatar: req.body.avatar
+  }, {new: true}, (err, user) => {
     if (err) return res.status(500).send({ message: `Error: ${err}` });
     if (!user) return res.status(404).send({ message: 'Error: usuario no encontrado' });
 
-    return res.status(200).send({ message: 'Usuario actualizado correctamente' });
+    return res.status(200).send({
+              message: 'Usuario actualizado correctamente',
+              user: user
+            });
   });
 }
 
@@ -73,6 +80,14 @@ function getUser ( req, res ) {
           user: user
         });
       });
+}
+
+function getAvatarName( id ) {
+  return new Promise((resolve, reject) => {
+    User.findById(id).exec((err, userDB) => {
+      resolve(userDB.avatar);
+    });
+  });
 }
 
 module.exports = {

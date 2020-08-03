@@ -11,6 +11,8 @@ import { Page404Component } from './components/page404/page404.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PipesModule } from './pipes/pipes.module';
+import { UploadService } from './services/upload.service';
 
 @NgModule({
   declarations: [
@@ -26,10 +28,12 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     AppRoutingModule,
     PanelModule,
-    HttpClientModule
+    HttpClientModule,
+    PipesModule
   ],
   providers: [
-    UserService
+    UserService,
+    UploadService
   ],
   bootstrap: [AppComponent]
 })

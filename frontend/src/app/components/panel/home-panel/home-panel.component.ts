@@ -16,7 +16,7 @@ export class HomePanelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = this._userService.decryptLocalUserInfo();
+    this.user = this._userService.user;
   }
 
 }
