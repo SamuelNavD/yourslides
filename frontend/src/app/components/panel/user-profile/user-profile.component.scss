@@ -350,3 +350,16 @@ textarea.input {
     opacity: 1;
   }
 }
+
+/* Cards */
+#card-image-profile {
+  margin-right: 3.3333%;
+  max-width: 30%;
+}
+
+@media screen and (max-width: 1040px) {
+  #card-image-profile {
+    margin-right: 0;
+    max-width: 100%;
+  }
+}

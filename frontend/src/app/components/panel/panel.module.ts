@@ -6,6 +6,7 @@ import { HomePanelComponent } from './home-panel/home-panel.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     AppRoutingModule,
     PipesModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ]
 })
 export class PanelModule { }
