@@ -118,6 +118,32 @@
           object-fit: cover;
         }
       }
+
+      ul.list-menu {
+        position: absolute;
+        display: inline-block;
+        right: 4em;
+        top: 60px;
+        padding: 1em;
+        width: 200px;
+        height: auto;
+
+        li, li a {
+          padding: 0;
+          margin: 0 auto;
+        }
+  
+      }
+    }
+  }
+
+  #animated_menu {
+    opacity: 0;
+    display: none;
+
+    &.open {
+      display: inline-block;
+      opacity: 1;
     }
   }
 }

@@ -1,6 +1,7 @@
 /* Imports */
 @import "../node_modules/@drewbot/sass-flexbox-grid/public/sass-flexbox/main.min.css";
 @import "assets/variables.scss";
+@import "../node_modules/animate.css/animate.min.css";
 
 /* Reset */
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -306,4 +307,9 @@ label {
       }
     }
   }
+}
+
+/* ANIMATIONS */
+.animate__forward {
+  animation-fill-mode: forwards;
 }
