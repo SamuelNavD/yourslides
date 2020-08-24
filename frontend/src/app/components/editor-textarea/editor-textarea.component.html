@@ -1,0 +1,17 @@
+<div id="editor-content">  
+</div>
+
+<div class="commandsList" [ngClass]="writting === 1 ? 'showed' : ''" id="commandsList" style="top: -100%; left: -100%;">
+  <p *ngIf="writting === 1 && searchResults.length == 0">No hay coincidencias</p>
+  <ul *ngIf="writting === 1">
+    <li tabindex="0" role="button" *ngFor="let result of searchResults; let i = index" [ngClass]="i === selectedItemList ? 'selected' : '' " (mouseover)="selectItem(i)" (mousedown)="setBlockIndex()" (click)="doAction(result.action, command.length + 1, publicBlockIndex)">
+      <div class="img">
+        <img src="../../../assets/img/bloques/{{ result.img }}" alt="">
+      </div>
+      <div class="text">
+        <span class="title">{{ result.title }}</span>
+        <span class="description">{{ result.description }}</span>
+      </div>
+    </li>
+  </ul>
+</div>

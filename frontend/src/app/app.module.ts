@@ -13,6 +13,8 @@ import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from './pipes/pipes.module';
 import { UploadService } from './services/upload.service';
+import { EditorLayoutComponent } from './components/_layouts/editor-layout/editor-layout.component';
+import { EditorTextareaComponent } from './components/editor-textarea/editor-textarea.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { UploadService } from './services/upload.service';
     SiteLayoutComponent,
     LoginComponent,
     RegistroComponent,
-    Page404Component
+    Page404Component,
+    EditorLayoutComponent,
+    EditorTextareaComponent
   ],
   imports: [
     BrowserModule,

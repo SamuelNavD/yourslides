@@ -1,0 +1,75 @@
+@import '../../../assets/variables.scss';
+
+.editor-content {
+  width: 100%;
+}
+
+.commandsList {
+  position: absolute;
+  padding: 10px 14px;
+  border-radius: 3px;
+  background: white;
+  width: 324px;
+  min-width: 180px;
+  max-width: calc(100vw - 24px);
+  height: auto;
+  max-height: 40vh;
+  box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+  margin: 4px 0;
+  z-index: 2;
+  opacity: 0;
+  overflow: hidden auto;
+  transition: opacity ease 0.1s;
+
+  &.showed { opacity: 1; }
+
+  ul li {
+    display: flex;
+    align-items: center;
+    line-height: 120%;
+    width: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-height: 45px;
+    font-size: 14px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: calc(100% + 14px);
+    padding-left: 14px;
+    margin-left: -14px;
+    cursor: pointer;
+    
+    div {
+      &.text {
+        display: flex;
+        flex-direction: column;
+        margin-left: 8px;
+        margin-right: 14px;
+        min-width: 0px;
+        flex: 1 1 auto;
+      }
+      
+      &.img img {
+        display: block;
+        object-fit: cover;
+        border-radius: 3px;
+        background: white;
+        width: 46px;
+        height: 46px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px;
+      }
+      .description {
+        color: rgba(55, 53, 47, 0.6);
+      }
+    }
+  }
+
+  .selected {
+    background-color: rgba(55, 53, 47, 0.08);
+    transition: background ease 0.2s;
+  }
+}

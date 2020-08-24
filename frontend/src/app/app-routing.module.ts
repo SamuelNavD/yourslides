@@ -10,6 +10,7 @@ import { Page404Component } from './components/page404/page404.component';
 import { UserProfileComponent } from './components/panel/user-profile/user-profile.component';
 
 import { LoginGuard } from './services/guards/login.guard';
+import { EditorLayoutComponent } from './components/_layouts/editor-layout/editor-layout.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
       { path: 'perfil', component: UserProfileComponent },
       { path: '', component: HomePanelComponent}
     ]
+  },
+  {
+    path: 'editor',
+    component: EditorLayoutComponent,
+    canActivate: [ LoginGuard ]
   },
   {
     path: 'acceso',
