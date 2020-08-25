@@ -11,7 +11,7 @@ export class MyParagraph {
     };
   }
 
-  constructor({data}){
+  constructor({data, api, config}){
     this.data.text = data.text ;
   }
 
