@@ -248,6 +248,8 @@ export class EditorTextareaComponent implements OnInit {
       }
     }
 
+    this.selectedItemList = 0;
+
     return results.sort(function(a, b){
       return b.similarity-a.similarity
    });
