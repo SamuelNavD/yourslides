@@ -1,4 +1,9 @@
 export class MyParagraph {
+  
+  public data = {
+    text: ''
+  };
+
   static get toolbox() {
     return {
       title: 'Párrafo',
@@ -6,11 +11,16 @@ export class MyParagraph {
     };
   }
 
+  constructor({data}){
+    this.data.text = data.text ;
+  }
+
   render(){
     var el = document.createElement('div');
     el.classList.add('ce-paragraph', 'cdx-block');
     el.setAttribute('contenteditable', 'true');
     el.setAttribute('data-placeholder', 'Escribe \'/\' para usar un comando');
+    if (this.data.text != null) el.innerText = this.data.text;
     return el;
   }
 

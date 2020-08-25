@@ -314,8 +314,8 @@ export class EditorTextareaComponent implements OnInit {
       var newBlockIndex = blockIndex + 1;
 
       if (dataOrigin.text != "") {
+        this.editor.blocks.delete(blockIndex);
         this.editor.blocks.insert(blockOrigin.type, dataOrigin, null, blockIndex);
-        this.editor.blocks.delete(blockIndex + 1);
         this.editor.caret.setToBlock(blockIndex); // revisar si genera conflicto al agregar el bloque
       } else {
         this.editor.blocks.delete(blockIndex);
