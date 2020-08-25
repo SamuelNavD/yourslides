@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/user');
 const uploadsRoutes = require('./routes/uploads');
+const slideRoutes = require('./routes/slide');
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.use((req, res, next) => {
 
 app.use('/user', userRoutes);
 app.use('/content', uploadsRoutes);
+app.use('/slide', slideRoutes);
 
 module.exports = app;
