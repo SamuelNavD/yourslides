@@ -8,9 +8,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { Page404Component } from './components/page404/page404.component';
 import { UserProfileComponent } from './components/panel/user-profile/user-profile.component';
+import { EditorLayoutComponent } from './components/_layouts/editor-layout/editor-layout.component';
+import { NewSlideComponent } from './components/panel/new-slide/new-slide.component';
 
 import { LoginGuard } from './services/guards/login.guard';
-import { EditorLayoutComponent } from './components/_layouts/editor-layout/editor-layout.component';
 
 const routes: Routes = [
   {
@@ -18,12 +19,13 @@ const routes: Routes = [
     component: PanelLayoutComponent,
     canActivate: [ LoginGuard ],
     children: [
+      { path: 'slides/nueva', component: NewSlideComponent },
       { path: 'perfil', component: UserProfileComponent },
       { path: '', component: HomePanelComponent}
     ]
   },
   {
-    path: 'editor',
+    path: 'editor/:id',
     component: EditorLayoutComponent,
     canActivate: [ LoginGuard ]
   },

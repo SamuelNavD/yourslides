@@ -1,11 +1,15 @@
-import { Component, OnInit, SimpleChange } from '@angular/core';
+import { Component, OnInit, SimpleChange, Input, ViewChild } from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
 
-import EditorJS, { SanitizerConfig } from '@editorjs/editorjs';
+import EditorJS, { SanitizerConfig, OutputData } from '@editorjs/editorjs';
 import Header from '@editorjs/header'; 
 import { MyParagraph } from './custom-blocks/my-paragraph';
 import { position, offset, Offset } from 'caret-pos';
 import { off } from 'process';
+import { SlideService } from 'src/app/services/slide.service';
+import { Slide } from 'src/app/models/slide';
+import { EditorLayoutComponent } from '../_layouts/editor-layout/editor-layout.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editor-textarea',
@@ -14,84 +18,11 @@ import { off } from 'process';
 })
 export class EditorTextareaComponent implements OnInit {
 
-  public editor = new EditorJS({
-    /**
-     * Id of Element that should contain Editor instance
-     */
-    holder: 'editor-content',
-    placeholder: 'Escribe \'/\' para usar un comando',
+  @Input()
+  id: String;
 
-    /** 
-     * Available Tools list. 
-     * Pass Tool's class or Settings object for each Tool you want to use 
-     */ 
-    tools: { 
-      paragraph: MyParagraph,
-      header: Header,
-    },
-
-    /**
-     * Internationalzation config
-     */
-    i18n: {
-      /**
-       * @type {I18nDictionary}
-       */
-      messages: {
-        /**
-         * Other below: translation of different UI components of the editor.js core
-         */
-        ui: {
-          "blockTunes": {
-            "toggler": {
-              "Click to tune": "Pulsa para editar",
-              "or drag to move": "o desliza para mover"
-            },
-          },
-          "inlineToolbar": {
-            "converter": {
-              "Convert to": "Convertir en"
-            }
-          },
-          "toolbar": {
-            "toolbox": {
-              "Add": "Añadir"
-            }
-          }
-        },
-    
-        /**
-         * Section for translation Tool Names: both block and inline tools
-         */
-        toolNames: {
-          "Text": "Párrafo",
-          "Heading": "Encabezado",
-          "List": "Lista"
-        },
-    
-        /**
-         * Section allows to translate Block Tunes
-         */
-        blockTunes: {
-          /**
-           * Each subsection is the i18n dictionary that will be passed to the corresponded Block Tune plugin
-           * The name of a plugin should be equal the name you specify in the 'tunes' section for that plugin
-           *
-           * Also, there are few internal block tunes: "delete", "moveUp" and "moveDown"
-           */
-          "delete": {
-            "Delete": "Eliminar"
-          },
-          "moveUp": {
-            "Move up": "Mover arriba"
-          },
-          "moveDown": {
-            "Move down": "Mover abajo"
-          }
-        },
-      }
-    }
-  });
+  public slide: Slide;
+  public editor: EditorJS;
 
   subscription: Subscription;
 
@@ -139,19 +70,126 @@ export class EditorTextareaComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(
+    public _slideService: SlideService,
+    public router: Router
+  ) { }
 
   ngOnInit() {
-    var observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutationRecord) {
-        var newStyle = document.getElementsByClassName('ce-toolbar__plus')[0].getAttribute('style');
-        document.getElementsByClassName('ce-toolbar__actions')[0].setAttribute('style', newStyle);
-      });    
-    });
-      
-    var target = document.getElementsByClassName('ce-toolbar__plus')[0];
-    observer.observe(target, { attributes : true, attributeFilter : ['style'] });
+    this._slideService.getSlide(this.id).subscribe( res => {
+      this.slide = res;
+      this.editor = new EditorJS({
+        /**
+         * Id of Element that should contain Editor instance
+         */
+        holder: 'editor-content',
+        placeholder: 'Escribe \'/\' para usar un comando',
+    
+        /** 
+         * Available Tools list. 
+         * Pass Tool's class or Settings object for each Tool you want to use 
+         */ 
+        tools: { 
+          paragraph: MyParagraph,
+          header: Header,
+        },
+    
+        data: this.slide.content,
+    
+        /**
+         * Internationalzation config
+         */
+        i18n: {
+          /**
+           * @type {I18nDictionary}
+           */
+          messages: {
+            /**
+             * Other below: translation of different UI components of the editor.js core
+             */
+            ui: {
+              "blockTunes": {
+                "toggler": {
+                  "Click to tune": "Pulsa para editar",
+                  "or drag to move": "o desliza para mover"
+                },
+              },
+              "inlineToolbar": {
+                "converter": {
+                  "Convert to": "Convertir en"
+                }
+              },
+              "toolbar": {
+                "toolbox": {
+                  "Add": "Añadir"
+                }
+              }
+            },
+        
+            /**
+             * Section for translation Tool Names: both block and inline tools
+             */
+            toolNames: {
+              "Text": "Párrafo",
+              "Heading": "Encabezado",
+              "List": "Lista"
+            },
+        
+            /**
+             * Section allows to translate Block Tunes
+             */
+            blockTunes: {
+              /**
+               * Each subsection is the i18n dictionary that will be passed to the corresponded Block Tune plugin
+               * The name of a plugin should be equal the name you specify in the 'tunes' section for that plugin
+               *
+               * Also, there are few internal block tunes: "delete", "moveUp" and "moveDown"
+               */
+              "delete": {
+                "Delete": "Eliminar"
+              },
+              "moveUp": {
+                "Move up": "Mover arriba"
+              },
+              "moveDown": {
+                "Move down": "Mover abajo"
+              }
+            },
+          }
+        },
 
+        /**
+         * OnReady callback
+         */
+        onReady: () => {
+          var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+              var newStyle = document.getElementsByClassName('ce-toolbar__plus')[0].getAttribute('style');
+              document.getElementsByClassName('ce-toolbar__actions')[0].setAttribute('style', newStyle);
+            });    
+          });
+            
+          var target = document.getElementsByClassName('ce-toolbar__plus')[0];
+          observer.observe(target, { attributes : true, attributeFilter : ['style'] });  
+        },
+
+        /**
+         * OnChange callback
+         */
+        onChange: () => {
+          this.saveSlideContent();
+        }
+      });
+  
+    }, error => this.router.navigate(['/panel']));
+
+
+    /** EventListener changes not saved */
+    document.addEventListener('keydown', (e) => {
+      this._slideService.saved = false;
+    });
+
+    /** EventListener commands */
     document.addEventListener('keydown', (e) => {
       if (e['keyCode'] === 27) {
         this.writting = 0;
@@ -177,6 +215,7 @@ export class EditorTextareaComponent implements OnInit {
 
       } else if (this.writting == 1 && e['keyCode'] != 32 && e['keyCode'] != 13) {
         if (e['keyCode'] === 40) {
+          this.editor.caret.setToPreviousBlock("end");
           e.preventDefault();
           if (this.searchResults.length > (this.selectedItemList + 1)) {
             this.selectedItemList++;
@@ -209,7 +248,9 @@ export class EditorTextareaComponent implements OnInit {
             divList.style.left = '-100%';
           }
         }
-        this.searchResults = this.search(this.command);
+        if (e['keyCode'] != 40 && e['keyCode'] != 38) {
+          this.searchResults = this.search(this.command);
+        }
       } else if (this.writting == 1 && e['keyCode'] === 13) {
         this.doAction(this.searchResults[this.selectedItemList].action, this.command.length + 1);
       } else {
@@ -223,7 +264,6 @@ export class EditorTextareaComponent implements OnInit {
   }
 
   ngOnDestroy() {
-  
   }
 
   search(input: string) {
@@ -305,10 +345,13 @@ export class EditorTextareaComponent implements OnInit {
   }
 
   doAction(action: string, backspaces: number, originBlockIndex?: number) {
+
     this.editor.save().then((outputData) => {
       var blockIndex = this.editor.blocks.getCurrentBlockIndex() - 1;
+      var clicked = false;
       if (originBlockIndex != null) {
         var blockIndex = originBlockIndex;
+        clicked = true;
       }
       var blockOrigin = outputData.blocks[blockIndex];
       var dataOrigin = blockOrigin.data;
@@ -327,25 +370,29 @@ export class EditorTextareaComponent implements OnInit {
       // Una vez se ha quitado el comando del bloque, se continua con la ejecución del comando
       switch (action) {
         case 'addText':
-          this.editor.blocks.insert('paragraph');
-          this.editor.blocks.move(newBlockIndex, blockIndex + 1)
-          this.editor.caret.setToBlock(newBlockIndex, "start");
+          this.insertBlock('paragraph', newBlockIndex, blockIndex, clicked);
           break;
 
         case 'addHeader':
-          this.editor.blocks.insert('header');
-          this.editor.blocks.move(newBlockIndex, blockIndex + 1)
-          this.editor.caret.setToBlock(newBlockIndex, "start");
+          this.insertBlock('header', newBlockIndex, blockIndex, clicked);
           break;
 
         case 'save':
-          // Cambiar por la funcionalidad
-          console.log('Guardado');
+          this.slide.content = outputData;
+          this.saveSlideContent(outputData);
           break;
           
         default:
           console.error('Acción no encontrada');
           break;
+      }
+
+      if (originBlockIndex == null && dataOrigin.text != "") {
+        // Eliminamos el bloque que se genera al pulsar enter
+        this.editor.blocks.delete(blockIndex + 2);
+      } else if (originBlockIndex == null) {
+        // Eliminamos el bloque que se genera al pulsar enter
+        this.editor.blocks.delete(blockIndex + 1);
       }
 
       // Para finalizar, se resetea el slasher
@@ -362,9 +409,41 @@ export class EditorTextareaComponent implements OnInit {
 
   }
 
+  saveSlideContent(content?: OutputData) {
+    this._slideService.saved = false;
+    
+    if (content == null) {
+      this.editor.save().then((outputData) => {
+        content = outputData;
+
+        this.slide.content = content;
+        this._slideService.updateSlide(this.slide).subscribe(res => {
+          if (res) this._slideService.saved = true;
+        });
+      }).catch((error) => {
+        console.log('Saving failed: ', error)
+      });  
+    } else {
+      this.slide.content = content;
+      this._slideService.updateSlide(this.slide).subscribe(res => {
+        if (res) this._slideService.saved = true;
+      });
+      
+    }
+
+  }
+
   scrollCommandPanel() {
     if (this.searchResults.length * 55 > document.getElementById('commandsList').clientHeight) {
       document.getElementById('commandsList').scrollTo(0, this.selectedItemList * 54);
     }
+  }
+
+  insertBlock(type: string, newBlockIndex: number, blockIndex: number, clicked: boolean) {
+    this.editor.blocks.insert(type);
+    if (!clicked) {
+      this.editor.blocks.move(newBlockIndex, blockIndex + 1);
+    }
+    this.editor.caret.setToBlock(newBlockIndex, "start");
   }
 }

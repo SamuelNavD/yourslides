@@ -7,13 +7,15 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NewSlideComponent } from './new-slide/new-slide.component';
 
 @NgModule({
   declarations: [
     PanelComponent,
     PanelLayoutComponent,
     HomePanelComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    NewSlideComponent
   ],
   imports: [
     AppRoutingModule,

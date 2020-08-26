@@ -1,0 +1,38 @@
+<div class="page-title">
+  <h1>Crea presentación</h1>
+</div>
+
+<div class="row">
+
+  <form ngNativeValidator #f="ngForm" action="" (submit)="createSlide()" class="contact-form col col-xs-12 card">
+    <div class="wrap-contact">
+
+      <div class="wrap-input validate-input">
+        <label class="label-input" for="name">Título de la presentación</label>
+        <input id="name" [(ngModel)]="slide.title" class="input" type="text" name="title" placeholder="Elige un título llamativo" required>
+        <span class="focus-input"></span>
+      </div>
+
+      <div id="themes" class="wrap-input validate-input" style="border-color: transparent;">
+        <label>
+          <input type="radio" [(ngModel)]="slide.setting" name="theme" value="light" checked>
+          <img src="https://ssl.gstatic.com/docs/templates/thumbnails/19jGfHq434ftbnGw0Y8BFC8eIP9gVcH2lC1xjFfbdG84_400.png">
+        </label>
+        
+        <label>
+          <input type="radio" [(ngModel)]="slide.setting" name="theme" value="dark">
+          <img src="https://ssl.gstatic.com/docs/templates/thumbnails/1IZ6nouC9AK0AsjTbKJKra-suLKe4By5WFa55iB0k-Ck_400.png">
+        </label>
+      </div>
+
+      <div class="container-contact-form-btn">
+        <button type="submit" class="btn btn-full btn-primary" [disabled]="!f.form.valid">
+          Crear presentación
+        </button>
+      </div>
+
+    </div>
+  
+  </form>
+
+</div>
