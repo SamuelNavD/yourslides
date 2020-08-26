@@ -77,7 +77,7 @@ export class EditorTextareaComponent implements OnInit {
 
   ngOnInit() {
     this._slideService.getSlide(this.id).subscribe( res => {
-      this.slide = res;
+      this._slideService.slide = res;
       this.editor = new EditorJS({
         /**
          * Id of Element that should contain Editor instance
@@ -94,7 +94,7 @@ export class EditorTextareaComponent implements OnInit {
           header: Header,
         },
     
-        data: this.slide.content,
+        data: this._slideService.slide.content,
     
         /**
          * Internationalzation config
@@ -416,8 +416,8 @@ export class EditorTextareaComponent implements OnInit {
       this.editor.save().then((outputData) => {
         content = outputData;
 
-        this.slide.content = content;
-        this._slideService.updateSlide(this.slide).subscribe(res => {
+        this._slideService.slide.content = content;
+        this._slideService.updateSlide().subscribe(res => {
           if (res) this._slideService.saved = true;
         });
       }).catch((error) => {

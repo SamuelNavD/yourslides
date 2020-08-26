@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class SlideService {
 
+  public slide: Slide = new Slide('', '', '');
   public saved: Boolean = true;
 
   constructor(
@@ -31,11 +32,14 @@ export class SlideService {
     
     return this.http.get( url )
             .pipe(map( (res: any) => {
+              this.slide = res.slide;
               return res.slide;
             }));
   }
 
-  updateSlide( slide: Slide ) {
+  updateSlide( slide?: Slide ) {
+    if (slide == null) slide = this.slide;
+
     let url = URL_SERVICES + '/slide/update';
     
     return this.http.post( url, slide )

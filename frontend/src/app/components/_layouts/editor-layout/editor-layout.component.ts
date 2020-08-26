@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SlideService } from 'src/app/services/slide.service';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { EditorTextareaComponent } from '../../editor-textarea/editor-textarea.component';
 
 @Component({
   selector: 'app-editor-layout',
@@ -33,7 +34,10 @@ export class EditorLayoutComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe( params => this.id = params['id'] );
+    this.sub = this.route.params.subscribe( params => {
+      this.id = params['id'];
+      this._slideService.getSlide(this.id).subscribe();
+    } );
   }
 
   ngOnDestroy(): void {
@@ -53,6 +57,14 @@ export class EditorLayoutComponent implements OnInit, OnDestroy {
         element.add('open');
       }, 1);
     }
+  }
+
+  updateTitle() {
+    setTimeout(() => {
+      this._slideService.updateSlide().subscribe(res => {
+        if (res) this._slideService.saved = true;
+      });
+    }, 1500);
   }
 
 }
