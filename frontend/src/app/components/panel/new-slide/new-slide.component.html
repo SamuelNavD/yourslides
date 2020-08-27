@@ -13,7 +13,7 @@
         <span class="focus-input"></span>
       </div>
 
-      <app-theme-list (themeChange)="receiveTheme($event)"></app-theme-list>
+      <app-theme-list (themeChange)="receiveTheme($event)" style="width: 100%;"></app-theme-list>
 
       <div class="container-contact-form-btn">
         <button type="submit" class="btn btn-full btn-primary" [disabled]="!f.form.valid">

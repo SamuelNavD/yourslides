@@ -29,6 +29,7 @@
 }
 
 .cta {
+  outline: none;
   transition: all ease 0.25s;
   cursor: pointer;
 
@@ -87,7 +88,7 @@
           border-bottom: solid 10px transparent;
           border-right: solid 10px transparent;
           position: absolute;
-          margin-top: 36px;
+          margin-top: 34px;
           margin-left: -10px;
         }
       }
