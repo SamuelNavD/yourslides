@@ -8,6 +8,6 @@ const SlideSchema = Schema({
   setting: Object,
   content: { type: Object, default: {} },
   owner: String
-}, { minimize: false });
+}, { minimize: false, timestamps: true });
 
 module.exports = mongoose.model('Slide', SlideSchema);

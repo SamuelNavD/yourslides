@@ -65,10 +65,27 @@ function deleteSlide ( req, res ) {
       });
 }
 
+function getAll ( req, res ) {
+
+  var owner = req.params.owner;
+
+  Slide.find( { owner: owner } )
+      .sort( { updatedAt: 'desc' } )
+      .exec( (err, slides) => {
+        if (err) return res.status(500).send({ message: err });
+        if (!slides) return res.status(404).send({ message: "No hay presentaciones" });
+
+        res.status(200).json({
+          slides: slides
+        });
+      });
+}
+
 
 module.exports = {
   createSlide,
   updateSlide,
   getSlide,
-  deleteSlide
+  deleteSlide,
+  getAll
 };
