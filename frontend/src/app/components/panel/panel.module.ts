@@ -8,6 +8,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NewSlideComponent } from './new-slide/new-slide.component';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NewSlideComponent } from './new-slide/new-slide.component';
     AppRoutingModule,
     PipesModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class PanelModule { }

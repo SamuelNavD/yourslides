@@ -1,0 +1,38 @@
+@import '../../../assets/variables.scss';
+
+#themes {
+  display: flex;
+  width: calc(100% - 4px);
+  justify-content: space-between;
+  padding: 0 4px;
+  flex-wrap: wrap;
+  flex-shrink: unset;
+
+  label {
+    width: 33%;
+  }
+  
+  /* HIDE RADIO */
+  [type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+
+  /* IMAGE STYLES */
+  [type=radio] + img {
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+
+  /* CHECKED STYLES */
+  [type=radio]:checked + img {
+    border-radius: 10px;
+    border: 2px solid $primary-color;
+  }
+  
+}

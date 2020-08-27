@@ -16,6 +16,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { UploadService } from './services/upload.service';
 import { EditorLayoutComponent } from './components/_layouts/editor-layout/editor-layout.component';
 import { EditorTextareaComponent } from './components/editor-textarea/editor-textarea.component';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EditorTextareaComponent } from './components/editor-textarea/editor-tex
     AppRoutingModule,
     PanelModule,
     HttpClientModule,
-    PipesModule
+    PipesModule,
+    SharedModule
   ],
   providers: [
     UserService,

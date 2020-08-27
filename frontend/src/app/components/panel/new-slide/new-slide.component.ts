@@ -33,4 +33,8 @@ export class NewSlideComponent implements OnInit {
       this.router.navigate(['/editor', res.slide._id]);
     });
   }
+
+  receiveTheme($event) {
+    this.slide.setting = $event;
+  }
 }

@@ -19,6 +19,11 @@
         </a>
         <div id="menu-bar" class="menu-bar hide">
           <ul>
+            <li (click)="toggleMenu('menu-bar'); toggleMenu('theme-card')">
+              <svg viewBox="0 0 20 20" class="templatesColor" style="width: 17px; height: 100%; display: block; fill: rgba(55, 53, 47, 0.3); flex-shrink: 0; backface-visibility: hidden; margin-right: 0.5em;"><g><path d="M6.39733 5.67853C5.89764 5.50234 5.36002 5.40649 4.8 5.40649C2.14904 5.40649 0 7.55432 0 10.2038C0 12.8533 2.14904 15.0011 4.8 15.0011C6.52165 15.0011 8.0316 14.0952 8.87867 12.7343L5.26487 12.0975L6.39733 5.67853Z" fill="#3C9ED7"></path><path d="M17.3126 3.66609L7.85843 2L6.19141 11.4489L10.6545 12.2354L14.3998 5.81854L16.3449 9.15116L17.3126 3.66609Z" fill="#E7595E"></path><path d="M8.80078 17L14.4008 7.4054L20.0008 17H8.80078Z" fill="#F5BC4E"></path></g></svg>
+              Cambiar estilo
+            </li>
+            <li class="separator"></li>
             <li>
               <svg viewBox="0 0 30 30" class="icon" style="width: 17px; height: 17px; display: block; fill: inherit; flex-shrink: 0; backface-visibility: hidden;"><path d="M22,8v12c0,3.866-3.134,7-7,7s-7-3.134-7-7V8c0-2.762,2.238-5,5-5s5,2.238,5,5v12c0,1.657-1.343,3-3,3s-3-1.343-3-3V8h-2v12c0,2.762,2.238,5,5,5s5-2.238,5-5V8c0-3.866-3.134-7-7-7S6,4.134,6,8v12c0,4.971,4.029,9,9,9s9-4.029,9-9V8H22z"></path></svg>
               Exportar
@@ -48,6 +53,16 @@
 
 <div class="row" id="editor-textarea-container">
   <app-editor-textarea [id]="id"></app-editor-textarea>
+</div>
+
+<div id="theme-card" class="hide">
+  <div class="card">
+    <span style="position: relative; float: right; cursor: pointer; fill: rgba(55, 53, 47, 0.3);" (click)="toggleMenu('theme-card')">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
+    </span>
+    <h5 style="font-weight: 400; margin-bottom: 1em; color: rgba(55, 53, 47, 1); margin-left: 4px;">Estilo de la presentación</h5>
+    <app-theme-list (themeChange)="receiveTheme($event)" [setting]="_slideService.slide.setting"></app-theme-list>
+  </div>
 </div>
 
 

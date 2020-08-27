@@ -9,8 +9,7 @@ import { EditorTextareaComponent } from '../../editor-textarea/editor-textarea.c
   templateUrl: './editor-layout.component.html',
   styleUrls: ['./editor-layout.component.scss'],
   animations: [
-    trigger(
-      'enterAnimation', [
+    trigger('enterAnimation', [
         transition(':enter', [
           style({transform: 'translateX(5px)', opacity: 0}),
           animate('100ms', style({transform: 'translateX(0)', opacity: 1}))
@@ -19,8 +18,7 @@ import { EditorTextareaComponent } from '../../editor-textarea/editor-textarea.c
           style({transform: 'translateX(0)', opacity: 1}),
           animate('100ms', style({transform: 'translateX(-5px)', opacity: 0}))
         ])
-      ]
-    )
+    ])
   ]
 })
 export class EditorLayoutComponent implements OnInit, OnDestroy {
@@ -67,4 +65,9 @@ export class EditorLayoutComponent implements OnInit, OnDestroy {
     }, 1500);
   }
 
+  receiveTheme($event) {
+    this.toggleMenu('theme-card');
+    this._slideService.slide.setting = $event;
+    this._slideService.updateSlide().subscribe();
+  }
 }
