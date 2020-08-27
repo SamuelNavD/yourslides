@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NewSlideComponent } from './new-slide/new-slide.component';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
+import { SlidesComponent } from './slides/slides.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
     PanelLayoutComponent,
     HomePanelComponent,
     UserProfileComponent,
-    NewSlideComponent
+    NewSlideComponent,
+    SlidesComponent
   ],
   imports: [
     AppRoutingModule,

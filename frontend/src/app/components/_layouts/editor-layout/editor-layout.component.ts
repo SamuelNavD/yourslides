@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {Location} from '@angular/common';
+
 import { SlideService } from 'src/app/services/slide.service';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { EditorTextareaComponent } from '../../editor-textarea/editor-textarea.component';
 
 @Component({
   selector: 'app-editor-layout',
@@ -28,7 +29,8 @@ export class EditorLayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    public _slideService: SlideService
+    public _slideService: SlideService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -69,5 +71,9 @@ export class EditorLayoutComponent implements OnInit, OnDestroy {
     this.toggleMenu('theme-card');
     this._slideService.slide.setting = $event;
     this._slideService.updateSlide().subscribe();
+  }
+
+  goToPrevious() {
+    this.location.back();
   }
 }

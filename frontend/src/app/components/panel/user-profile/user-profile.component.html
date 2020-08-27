@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-  <div class="col col-xs-12 col-md-4 card" id="card-image-profile">
+  <div class="col col-xs-12 col-md-4 card" id="card-image-profile" [style.padding-bottom]="!imgTemp ? '0.5rem' : '1rem'">
     <label for="userImage" class="change-image-input">
       <img *ngIf="!imgTemp" [src]="user.avatar | image" alt="">
       <img *ngIf="imgTemp" [src]="imgTemp" alt="">
@@ -16,7 +16,7 @@
       </div>
     </label>
     <input type="file" id="userImage" (change)="uploadImage( $event.target.files[0] )" >
-    <button class="btn btn-primary btn-full" [disabled]="!imgTemp" (click)="updateUserImage()">Cambiar imagen perfil</button>    
+    <button class="btn btn-primary btn-full" [style.display]="!imgTemp ? 'none' : ''" (click)="updateUserImage()">Cambiar imagen perfil</button>    
   </div>
 
   <form ngNativeValidator #f="ngForm" action="" (submit)="updateUser(f)" class="contact-form col col-xs-12 col-md-8 card">

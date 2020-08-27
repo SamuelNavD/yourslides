@@ -1,0 +1,32 @@
+<div class="page-title">
+  <h1>Mis presentaciones</h1>
+  <a class="add" [routerLink]="['/panel/slide/nueva']">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24"><path fill="currentColor" d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z" class=""></path></svg>
+    <span>Crear presentación</span>
+  </a>
+</div>
+
+<div class="row">
+  <div class="presentation-list">
+    <div class="presentation-item" *ngFor="let slide of slides">
+      <div class="left">
+        <div class="image"></div>
+        <div class="text">
+          <h4>{{ slide.title }}</h4>
+          <p>{{ calculateDiffDates(slide.updatedAt) }}</p>
+        </div>
+      </div>
+      
+      <div class="buttons">
+        <a class="edit" [routerLink]="['/editor', slide._id]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="currentColor" d="M493.26 56.26l-37.51-37.51C443.25 6.25 426.87 0 410.49 0s-32.76 6.25-45.25 18.74l-74.49 74.49L256 127.98 12.85 371.12.15 485.34C-1.45 499.72 9.88 512 23.95 512c.89 0 1.79-.05 2.69-.15l114.14-12.61L384.02 256l34.74-34.74 74.49-74.49c25-25 25-65.52.01-90.51zM118.75 453.39l-67.58 7.46 7.53-67.69 231.24-231.24 31.02-31.02 60.14 60.14-31.02 31.02-231.33 231.33zm340.56-340.57l-44.28 44.28-60.13-60.14 44.28-44.28c4.08-4.08 8.84-4.69 11.31-4.69s7.24.61 11.31 4.69l37.51 37.51c6.24 6.25 6.24 16.4 0 22.63z" class=""></path></svg>
+          <span>Editar</span>
+        </a>
+        <a class="present" [routerLink]="['/editor', slide._id]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 512"><path fill="currentColor" d="M307.72 133.65a16 16 0 0 0 22.63 0l11.31-11.31a16 16 0 0 0 0-22.62l-67.88-67.89a16 16 0 0 0-22.63 0l-11.31 11.31a16 16 0 0 0 0 22.63zM408 128h16a16 16 0 0 0 16-16V16a16 16 0 0 0-16-16h-16a16 16 0 0 0-16 16v96a16 16 0 0 0 16 16zm93.65 5.65a16 16 0 0 0 22.63 0l67.88-67.88a16 16 0 0 0 0-22.63l-11.31-11.31a16 16 0 0 0-22.63 0l-67.88 67.89a16 16 0 0 0 0 22.62zM112 296a24 24 0 1 0 24 24 24 24 0 0 0-24-24zm480-104H480.58c-19.51-9.89-41.25-16-64.58-16s-45.07 6.11-64.58 16H48a48 48 0 0 0-48 48v160a48 48 0 0 0 48 48h16l13 51.88A16 16 0 0 0 92.49 512h23A16 16 0 0 0 131 499.88L144 448h207.42c19.51 9.89 41.25 16 64.58 16s45.07-6.11 64.58-16H496l13 51.88A16 16 0 0 0 524.49 512h23A16 16 0 0 0 563 499.88L576 448h16a48 48 0 0 0 48-48V240a48 48 0 0 0-48-48zM296.38 400H48V240h248.38a143.45 143.45 0 0 0 0 160zM416 416a96 96 0 1 1 96-96 96.14 96.14 0 0 1-96 96zm176-16h-56.38a143.45 143.45 0 0 0 0-160H592zM176 296a24 24 0 1 0 24 24 24 24 0 0 0-24-24z" class=""></path></svg>
+          <span>Presentar</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

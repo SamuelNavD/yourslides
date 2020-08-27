@@ -6,6 +6,8 @@ export class Slide {
     public setting: string,
     public owner: string,
     public content?: OutputData,
-    public _id?: string
+    public _id?: string,
+    public createdAt?: Date,
+    public updatedAt?: Date
   ){}
 }

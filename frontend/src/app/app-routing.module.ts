@@ -10,6 +10,7 @@ import { Page404Component } from './components/page404/page404.component';
 import { UserProfileComponent } from './components/panel/user-profile/user-profile.component';
 import { EditorLayoutComponent } from './components/_layouts/editor-layout/editor-layout.component';
 import { NewSlideComponent } from './components/panel/new-slide/new-slide.component';
+import { SlidesComponent } from './components/panel/slides/slides.component';
 
 import { LoginGuard } from './services/guards/login.guard';
 
@@ -19,7 +20,8 @@ const routes: Routes = [
     component: PanelLayoutComponent,
     canActivate: [ LoginGuard ],
     children: [
-      { path: 'slides/nueva', component: NewSlideComponent },
+      { path: 'slides', component: SlidesComponent },
+      { path: 'slide/nueva', component: NewSlideComponent },
       { path: 'perfil', component: UserProfileComponent },
       { path: '', component: HomePanelComponent}
     ]

@@ -185,3 +185,40 @@ app-editor-textarea {
     z-index: 7;
   }
 }
+
+.back-button {
+  position: fixed;
+  left: 2em;
+  bottom: 2em;
+  padding: 8px 10px;
+  border: solid 2px rgba(55, 53, 47, 0.3);
+  background-color: transparent;
+  color: rgba(55, 53, 47, 0.3);
+  border-radius: 5px;
+  font-family: $stolzl;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  transition: all ease 0.1s;
+
+  .text {
+    margin-left: 3px;
+    width: 0px;
+    opacity: 0;
+    transition: all ease 0.25s 0.05s;
+  }
+  
+  &:hover {
+    color: rgba(55, 53, 47, 0.9);
+    background-color: rgba(55, 53, 47, 0.05);
+    border-color: transparent;
+
+    .text {
+      margin-left: 7px;
+      width: 51px;
+      opacity: 1;
+    }
+  }
+}

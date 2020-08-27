@@ -47,4 +47,13 @@ export class SlideService {
               return res;
             }));
   }
+
+  getAll( _id: String ) {
+    let url = URL_SERVICES + '/slide/all/' + _id;
+    
+    return this.http.get( url )
+            .pipe(map( (res: any) => {
+              return res;
+            }));
+  }
 }
