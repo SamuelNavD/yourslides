@@ -19,6 +19,10 @@ export class SlidesListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  newTab(id: string) {
+    window.open('s/'+id, '_blank');
+  }
+
   calculateDiffDates(dateEdited: Date){
     let currentDate = new Date();
     dateEdited = new Date(dateEdited);
