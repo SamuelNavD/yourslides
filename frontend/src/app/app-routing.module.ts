@@ -13,6 +13,7 @@ import { NewSlideComponent } from './components/panel/new-slide/new-slide.compon
 import { SlidesComponent } from './components/panel/slides/slides.component';
 
 import { LoginGuard } from './services/guards/login.guard';
+import { SlideProjectorComponent } from './components/slide-projector/slide-projector.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,12 @@ const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'registro', component: RegistroComponent }
+    ]
+  },
+  {
+    path: 's',
+    children: [
+      { path: ':id', component: SlideProjectorComponent }
     ]
   },
   {

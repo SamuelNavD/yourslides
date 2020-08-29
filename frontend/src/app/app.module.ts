@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from './modules/shared/shared.module';
+
 import { AppRoutingModule } from './app-routing.module';
 import { PanelModule } from './components/panel/panel.module';
 import { AppComponent } from './app.component';
@@ -16,7 +18,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { UploadService } from './services/upload.service';
 import { EditorLayoutComponent } from './components/_layouts/editor-layout/editor-layout.component';
 import { EditorTextareaComponent } from './components/editor-textarea/editor-textarea.component';
-import { SharedModule } from './modules/shared/shared.module';
+import { SlideProjectorComponent } from './components/slide-projector/slide-projector.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { SharedModule } from './modules/shared/shared.module';
     RegistroComponent,
     Page404Component,
     EditorLayoutComponent,
-    EditorTextareaComponent
+    EditorTextareaComponent,
+    SlideProjectorComponent
   ],
   imports: [
     BrowserModule,

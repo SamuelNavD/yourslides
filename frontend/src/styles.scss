@@ -147,9 +147,15 @@ body {
 }
 
 /* Texts */
-p, a {
+p {
   font-family: $stolzl;
-  color: black;
+  :not(.reveal-viewport) {
+    color: black;
+  }
+}
+
+a {
+  font-family: $stolzl;
 }
 
 .text-primary { color: $primary-color; }

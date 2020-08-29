@@ -29,10 +29,12 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/@drewbot/sass-flexbox-grid/public/sass-flexbox/main.min.css"
+              "node_modules/@drewbot/sass-flexbox-grid/public/sass-flexbox/main.min.css",
+              "node_modules/reveal.js/dist/reveal.css",
+              "node_modules/reveal.js/dist/theme/black.css"
             ],
             "scripts": [
-            
+
             ]
           },
           "configurations": {
