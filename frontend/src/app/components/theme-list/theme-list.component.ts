@@ -7,6 +7,10 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class ThemeListComponent implements OnInit {
 
+  public themes: Array<string> = [
+    'yellow'
+  ]
+
   @Input()
   setting: String;
 

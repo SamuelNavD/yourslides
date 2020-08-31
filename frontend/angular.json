@@ -27,11 +27,19 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "extractCss": false,
             "styles": [
               "src/styles.scss",
               "node_modules/@drewbot/sass-flexbox-grid/public/sass-flexbox/main.min.css",
               "node_modules/reveal.js/dist/reveal.css",
-              "node_modules/reveal.js/dist/theme/black.css"
+              {
+                "input": "src/assets/slides-themes/modern.css",
+                "inject": false
+              },
+              {
+                "input": "src/assets/slides-themes/yellow.scss",
+                "inject": false
+              }
             ],
             "scripts": [
 

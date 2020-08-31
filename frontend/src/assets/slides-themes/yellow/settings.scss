@@ -1,0 +1,47 @@
+// Base settings for all themes that can optionally be
+// overridden by the super-theme
+
+$primary: #F9DC24;
+
+// Background of the presentation
+$backgroundColor: $primary;
+
+// Primary/body text
+$mainFont: 'Open Sans', sans-serif;
+$mainFontSize: 1.75em;
+$mainColor: rgb(38, 32, 37);
+
+// Vertical spacing between blocks of text
+$blockMargin: 20px;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
+$headingFont: 'Viga', Impact, sans-serif;
+$headingColor: rgb(38, 32, 37);
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: normal;
+$headingTextShadow: none;
+$headingFontWeight: normal;
+$heading1TextShadow: $headingTextShadow;
+
+$heading1Size: 8vw;
+$heading2Size: 5rem;
+$heading3Size: 4rem;
+$heading4Size: 2.5rem;
+
+$codeFont: monospace;
+
+// Links and actions
+$linkColor: rgb(20, 12, 17);
+$linkColorHover: lighten( $linkColor, 20% );
+
+// Text selection
+$selectionBackgroundColor: $primary;
+$selectionColor: #fff;
+
+// Generates the presentation background, can be overridden
+// to return a background image or gradient
+@mixin bodyBackground() {
+	background: $backgroundColor;
+}

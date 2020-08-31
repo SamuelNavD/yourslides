@@ -1,15 +1,18 @@
-import { Component, OnInit, SimpleChange, Input, ViewChild } from '@angular/core';
-import { Subscription, fromEvent } from 'rxjs';
+import { Component, OnInit, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import EditorJS, { SanitizerConfig, OutputData } from '@editorjs/editorjs';
 import Header from '@editorjs/header'; 
+import ImageTool from '@editorjs/image';
+import Delimiter from '@editorjs/delimiter';
 import { MyParagraph } from './custom-blocks/my-paragraph';
+
 import { position, offset, Offset } from 'caret-pos';
-import { off } from 'process';
+
 import { SlideService } from 'src/app/services/slide.service';
 import { Slide } from 'src/app/models/slide';
-import { EditorLayoutComponent } from '../_layouts/editor-layout/editor-layout.component';
 import { Router } from '@angular/router';
+import { URL_SERVICES } from 'src/app/config/config';
 
 @Component({
   selector: 'app-editor-textarea',
@@ -48,18 +51,32 @@ export class EditorTextareaComponent implements OnInit {
       'commands': ['nueva', 'new', 'agregar', 'diapositiva']
     },
     {
-      'title': 'Título 1',
-      'description': 'Título de la diapositiva',
+      'title': 'Título de la presentación',
+      'description': 'Crea presentaciones únicas con títulos molones',
       'img': 'header.png',
       'action': 'addHeader',
-      'commands': ['h1', 'heading1', 'titulo1']
+      'commands': ['h1', 'heading1', 'titulopresentacion']
     },
     {
-      'title': 'Título 2',
-      'description': 'Título de sección',
+      'title': 'Título de sección',
+      'description': 'Una presentación organizada siempre mantiene mejor la atención',
       'img': 'subheader.png',
       'action': 'addSubheader',
-      'commands': ['h2', 'heading2', 'titulo2']
+      'commands': ['h2', 'heading2', 'tituloseccion']
+    },
+    {
+      'title': 'Título diapositiva',
+      'description': 'Haz que cada diapositiva cuente algo',
+      'img': 'subheader.png',
+      'action': 'addSubsubheader',
+      'commands': ['h3', 'heading3', 'titulodiapositiva']
+    },
+    {
+      'title': 'Imagen',
+      'description': 'Inserta una imagen para darle mayor riqueza a tu presentación',
+      'img': 'image.png',
+      'action': 'addImage',
+      'commands': ['imagen', 'multimedia', 'img']
     },
     {
       'title': 'Guardar',
@@ -90,8 +107,21 @@ export class EditorTextareaComponent implements OnInit {
          * Pass Tool's class or Settings object for each Tool you want to use 
          */ 
         tools: { 
-          paragraph: MyParagraph,
+          paragraph: {
+            class: MyParagraph,
+            inlineToolbar: true
+          },
           header: Header,
+          image: {
+            class: ImageTool,
+            config: {
+              endpoints: {
+                byFile: URL_SERVICES + '/content/upload/image/file', // Your backend file uploader endpoint
+                byUrl: URL_SERVICES + '/content/upload/image/url', // Your endpoint that provides uploading by Url
+              }
+            }
+          },
+          delimiter: Delimiter
         },
     
         data: this._slideService.slide.content,
@@ -374,11 +404,29 @@ export class EditorTextareaComponent implements OnInit {
           break;
 
         case 'addHeader':
-          this.insertBlock('header', newBlockIndex, blockIndex, clicked);
+          this.insertBlock('header', newBlockIndex, blockIndex, clicked, {level: 1});
+          break;
+        
+        case 'addSubheader':
+          this.insertBlock('header', newBlockIndex, blockIndex, clicked, {level: 2});
+          break;
+
+        case 'addSubsubheader':
+          this.insertBlock('header', newBlockIndex, blockIndex, clicked, {level: 3});
+          break;
+
+        case 'addSlide':
+          this.insertBlock('delimiter', newBlockIndex, blockIndex, clicked);
+          this.editor.blocks.insert();
+          this.editor.caret.setToNextBlock();
+          break;
+        
+        case 'addImage':
+          this.insertBlock('image', newBlockIndex, blockIndex, clicked);
           break;
 
         case 'save':
-          this.slide.content = outputData;
+          this._slideService.slide.content = outputData;
           this.saveSlideContent(outputData);
           break;
           
@@ -424,8 +472,8 @@ export class EditorTextareaComponent implements OnInit {
         console.log('Saving failed: ', error)
       });  
     } else {
-      this.slide.content = content;
-      this._slideService.updateSlide(this.slide).subscribe(res => {
+      this._slideService.slide.content = content;
+      this._slideService.updateSlide().subscribe(res => {
         if (res) this._slideService.saved = true;
       });
       
@@ -439,8 +487,8 @@ export class EditorTextareaComponent implements OnInit {
     }
   }
 
-  insertBlock(type: string, newBlockIndex: number, blockIndex: number, clicked: boolean) {
-    this.editor.blocks.insert(type);
+  insertBlock(type: string, newBlockIndex: number, blockIndex: number, clicked: boolean, options?: Object) {
+    this.editor.blocks.insert(type, options);
     if (!clicked) {
       this.editor.blocks.move(newBlockIndex, blockIndex + 1);
     }

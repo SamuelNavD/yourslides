@@ -1,4 +1,6 @@
-export class MyParagraph {
+import { BlockTool, SanitizerConfig } from '@editorjs/editorjs';
+
+export class MyParagraph implements BlockTool {
   
   public data = {
     text: ''
@@ -20,13 +22,21 @@ export class MyParagraph {
     el.classList.add('ce-paragraph', 'cdx-block');
     el.setAttribute('contenteditable', 'true');
     el.setAttribute('data-placeholder', 'Escribe \'/\' para usar un comando');
-    if (this.data.text != null) el.innerText = this.data.text;
+    if (this.data.text != null) el.innerHTML = this.data.text;
     return el;
   }
 
-  save(blockContent){
+  static get sanitize() {
     return {
-      text: blockContent.innerText
+      text: {
+        b: true,
+      }
     }
+  }
+
+  save(blockContent){
+    return Object.assign(this.data, {
+      text: blockContent.innerHTML || ''
+    });
   }
 }
