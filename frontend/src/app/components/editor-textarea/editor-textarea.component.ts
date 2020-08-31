@@ -233,7 +233,7 @@ export class EditorTextareaComponent implements OnInit {
         this.command = "";
         this.selectedItemList = 0;
         this.searchResults = this.search(this.command);
-        this.caretPosition = offset(document.querySelector('.cdx-block'));
+        this.caretPosition = offset(document.querySelector('.cdx-block, .ce-header'));
         var divList = document.getElementById('commandsList');
         divList.style.left = this.caretPosition.left + 'px';
         if (this.caretPosition.top > (window.innerHeight / 2)) {
